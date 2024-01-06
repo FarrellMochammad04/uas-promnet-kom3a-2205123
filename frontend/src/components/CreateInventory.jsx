@@ -34,7 +34,6 @@ function CreateInventory() {
 
   const handleCloseModal = () => {
     setShowModal(false);
-    // You can add additional logic here if needed
   };
 
   const handleShowModal = () => {
@@ -44,14 +43,12 @@ function CreateInventory() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // Validasi jumlah
     const parsedJumlah = parseInt(formData.jumlah, 10);
     if (isNaN(parsedJumlah) || parsedJumlah < 0) {
       setErrorMessage('Jumlah harus lebih besar atau sama dengan 0.');
       return;
     }
 
-    // Validasi harga satuan
     const parsedHargaSatuan = parseInt(formData.harga_satuan, 10);
     if (isNaN(parsedHargaSatuan) || parsedHargaSatuan < 0) {
       setErrorMessage('Harga satuan harus lebih besar atau sama dengan 0.');
@@ -67,16 +64,14 @@ function CreateInventory() {
       });
       console.log('Response Data:', response.data);
 
-      console.log('Item created successfully');
-      handleShowModal(); // Show modal on success
+      console.log('Item added successfully');
+      handleShowModal(); 
 
-      // Bersihkan pesan kesalahan setelah berhasil membuat item
       setErrorMessage('');
     } catch (error) {
       console.error('Error creating item:', error.response || error);
 
       if (error.response) {
-        // Handle specific error cases, if needed
         if (error.response.status === 400) {
           setErrorMessage('Bad request. Please check your data.');
         } else {
@@ -90,7 +85,7 @@ function CreateInventory() {
 
   const handleModalConfirm = () => {
     handleCloseModal();
-    navigate('/'); // Navigate to the home route
+    navigate('/');
   };
 
   return (
@@ -99,7 +94,7 @@ function CreateInventory() {
         <Col md={5}>
           <div className="card">
             <div className="card-body rounded-2">
-              <h2 className="text-center mb-4">Create Inventory Item</h2>
+              <h2 className="text-center mb-4">Add Inventory Item</h2>
               <Form onSubmit={handleSubmit}>
                 <Form.Group controlId="formNamaBarang">
                   <Form.Label>Nama Barang</Form.Label>
@@ -186,13 +181,11 @@ function CreateInventory() {
           </div>
         </Col>
       </Row>
-
-      {/* Modal for Success */}
       <Modal show={showModal} onHide={handleCloseModal}>
         <Modal.Header closeButton>
           <Modal.Title>Success</Modal.Title>
         </Modal.Header>
-        <Modal.Body>Item created successfully!</Modal.Body>
+        <Modal.Body>Item added successfully!</Modal.Body>
         <Modal.Footer>
           <Button variant="primary" onClick={handleModalConfirm}>
             OK

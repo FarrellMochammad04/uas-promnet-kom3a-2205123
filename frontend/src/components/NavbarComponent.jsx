@@ -8,7 +8,7 @@ function NavbarComponent() {
         <nav className="navbar navbar-expand-lg navbar-dark bg-custom">
           <div className="container">
             <a className="navbar-brand" href="/">
-            私の店(My Store)
+            Store Inventory
             </a>
           </div>
         </nav>

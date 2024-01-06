@@ -38,25 +38,6 @@ function GetAllComponent() {
     }
   };
 
-  const searchInventoryByName = async () => {
-    try {
-      const response = await InventoryService.searchItemByName(searchTerm);
-      const searchData = response.data;
-  
-      if (searchData && searchData.length > 0) {
-        setInventoryItems(searchData);
-        setSearchError(null);
-      } else {
-        setInventoryItems([]);
-        setSearchError('No items found.');
-      }
-    } catch (error) {
-      console.error('Error searching inventory items:', error);
-      setSearchError('Error searching items. Please try again.');
-    }
-  };
-  
-
   const handleView = (itemId) => {
     console.log('Viewing item with ID:', itemId);
     navigate(`/view-inventory/${itemId}`);
@@ -105,28 +86,8 @@ function GetAllComponent() {
           <h2>In Stock</h2>
         </Col>
         <Col xs="auto">
-          <div className="d-flex">
-            <input
-              type="text"
-              placeholder="Search by Name"
-              value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)}
-            />
-            <Button
-              variant="primary"
-              className="ms-2"
-              onClick={() => {
-                setSearchTerm('');
-                fetchInventoryItems();
-              }}
-            >
-              Reset Search
-            </Button>
-          </div>
-        </Col>
-        <Col xs="auto">
           <Link to="/create-inventory">
-            <Button variant="success">Create Item</Button>
+            <Button variant="success">Add Item</Button>
           </Link>
         </Col>
       </Row>
